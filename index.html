@@ -3,211 +3,72 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#17694b">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Suivi déplacements">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icons/icon-192.png" type="image/png">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
 <title>Suivi des déplacements</title>
 <style>
 :root{--bg:#f2f4f3;--card:#fff;--tx:#17211c;--mut:#5f6b65;--ac:#17694b;--ac2:#0f4d36;--acx:#fff;--soft:#e4f1ea;--bd:#dde3df;--err:#b3261e;--sh:0 1px 3px rgba(0,0,0,.08);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1512;--card:#19221e;--tx:#eef3f0;--mut:#9aa8a1;--ac:#4cc093;--ac2:#2f8f6a;--acx:#06170f;--soft:#1f3329;--bd:#2c3a34;--err:#f2b8b5;--sh:none}}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1512;--card:#19221e;--tx:#eef3f0;--mut:#9aa8a1;--ac:#4cc093;--ac2:#2f8f6a;--acx:#06170f;--soft:#1f3329;--bd:#2c3a34;--err:#f2b8b5;--sh:none}}
 :root[data-theme="dark"]{--bg:#0f1512;--card:#19221e;--tx:#eef3f0;--mut:#9aa8a1;--ac:#4cc093;--ac2:#2f8f6a;--acx:#06170f;--soft:#1f3329;--bd:#2c3a34;--err:#f2b8b5;--sh:none}
-html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.hero{background:linear-gradient(135deg,var(--ac2),var(--ac));color:#fff;padding:22px 18px 46px}
-.hero div{max-width:640px;margin:0 auto}
-.hero h1{font-size:1.45rem;margin:0 0 4px;letter-spacing:-.01em}
-.hero p{margin:0;opacity:.9;font-size:.95rem}
-main{max-width:640px;margin:-28px auto 0;padding:0 14px 40px}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:20px 18px;margin-bottom:16px;box-shadow:var(--sh)}
-.dots{display:flex;gap:6px;margin-bottom:16px}
-.dots i{flex:1;height:6px;border-radius:3px;background:var(--bd)}
-.dots i.on{background:var(--ac)}
-.step{font-size:.82rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--ac);margin-bottom:6px}
-label{display:block;font-size:1.25rem;font-weight:700;line-height:1.3;margin-bottom:14px}
-input,textarea{width:100%;font:inherit;font-size:16px;color:var(--tx);background:var(--bg);border:1.5px solid var(--bd);border-radius:12px;padding:14px;min-height:52px;-webkit-appearance:none;appearance:none}
-textarea{min-height:130px;resize:vertical}
-input:focus,textarea:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 3px var(--soft)}
-.err{color:var(--err);font-size:.9rem;min-height:1.4em;margin-top:6px}
-.row{display:flex;flex-direction:column-reverse;gap:10px;margin-top:12px}
-@media (min-width:520px){.row{flex-direction:row;justify-content:flex-end}.row button{min-width:150px}}
-button{font:inherit;font-weight:600;border-radius:12px;padding:0 18px;min-height:50px;border:1.5px solid var(--bd);background:var(--card);color:var(--tx);cursor:pointer;-webkit-tap-highlight-color:transparent}
-button.p{background:var(--ac);color:var(--acx);border-color:var(--ac)}
-button:active{transform:scale(.98)}
-button:disabled{opacity:.45}
-dl{margin:0 0 6px;display:grid;grid-template-columns:96px 1fr;gap:10px 12px}
-dt{color:var(--mut);font-size:.92rem}dd{margin:0;font-weight:600;word-break:break-word}
-.ok{font-size:1.15rem;font-weight:700;margin:0 0 4px}
-.head{display:flex;justify-content:space-between;align-items:center;margin:8px 2px 12px}
-.head h2{font-size:1.1rem;margin:0}
-.badge{background:var(--soft);color:var(--ac);border-radius:20px;padding:2px 11px;font-weight:700;font-size:.9rem;margin-left:6px}
-.item{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px 16px;margin-bottom:10px;box-shadow:var(--sh)}
-.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
-.n{width:28px;height:28px;border-radius:50%;background:var(--ac);color:var(--acx);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex:none}
-.date{font-weight:700;flex:1}
-.pill{background:var(--soft);color:var(--ac);border-radius:8px;padding:3px 10px;font-weight:700;font-size:.85rem;word-break:break-all}
-.site{font-weight:600;margin-bottom:2px}
-.det{color:var(--mut);font-size:.95rem;white-space:pre-wrap;word-break:break-word}
-.del{margin-top:8px;min-height:38px;padding:0 14px;font-size:.88rem;font-weight:500;color:var(--err)}
-.empty{text-align:center;color:var(--mut);padding:22px 10px}
-.xl{width:100%;min-height:54px;font-size:1.05rem;margin-top:4px}
-.note{color:var(--mut);font-size:.85rem;text-align:center;margin:12px 0 0}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}.hero{background:linear-gradient(135deg,var(--ac2),var(--ac));color:#fff;padding:22px 18px 46px}.hero div{max-width:700px;margin:0 auto}.hero h1{font-size:1.45rem;margin:0 0 4px}.hero p{margin:0;opacity:.9;font-size:.95rem}main{max-width:700px;margin:-28px auto 0;padding:0 14px 40px}.card,.item{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:20px 18px;margin-bottom:16px;box-shadow:var(--sh)}.step{font-size:.82rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--ac);margin-bottom:6px}.fieldlabel{display:block;font-size:1.05rem;font-weight:700;margin:12px 0 7px}input,textarea{width:100%;font:inherit;font-size:16px;color:var(--tx);background:var(--bg);border:1.5px solid var(--bd);border-radius:12px;padding:13px;min-height:50px}textarea{min-height:110px;resize:vertical}input:focus,textarea:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 3px var(--soft)}button{font:inherit;font-weight:600;border-radius:12px;padding:0 16px;min-height:48px;border:1.5px solid var(--bd);background:var(--card);color:var(--tx);cursor:pointer}button.primary{background:var(--ac);color:var(--acx);border-color:var(--ac)}button.danger{color:var(--err)}button:disabled{opacity:.45;cursor:not-allowed}.row{display:flex;flex-wrap:wrap;gap:9px;justify-content:flex-end;margin-top:14px}.err{color:var(--err);font-size:.9rem;min-height:1.2em;margin-top:5px}.head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:8px 2px 12px}.head h2{font-size:1.1rem;margin:0}.badge{background:var(--soft);color:var(--ac);border-radius:20px;padding:2px 10px;font-weight:700;font-size:.85rem}.item{padding:14px 16px;margin-bottom:10px}.top{display:flex;align-items:center;gap:10px;margin-bottom:7px;flex-wrap:wrap}.date{font-weight:700;flex:1}.pill{background:var(--soft);color:var(--ac);border-radius:8px;padding:3px 9px;font-weight:700;font-size:.84rem}.site{font-weight:700;margin-bottom:2px}.det{color:var(--mut);font-size:.95rem;white-space:pre-wrap;word-break:break-word}.empty,.muted{text-align:center;color:var(--mut);padding:18px 8px}.note{color:var(--mut);font-size:.85rem;text-align:center;margin:12px 0}.hidden{display:none!important}.userbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;color:var(--mut);font-size:.9rem}.full{width:100%}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.loginwrap{max-width:460px;margin:0 auto}.status{padding:10px 12px;border-radius:10px;background:var(--soft);color:var(--ac);margin:10px 0;font-size:.9rem}
 </style>
 </head>
 <body>
-<header class="hero"><div>
-  <h1>🚗 Suivi des déplacements</h1>
-  <p>Date, site, n° de ticket et détail de chaque déplacement.</p>
-</div></header>
-
+<header class="hero"><div><h1>🚗 Suivi des déplacements</h1><p>Historique partagé des déplacements de l'équipe informatique.</p></div></header>
 <main>
-  <section class="card" id="form"></section>
-
-  <div class="head"><h2>Déplacements enregistrés <span class="badge" id="count">0</span></h2></div>
-  <div id="list"></div>
-  <button class="p xl" id="xl">Télécharger le fichier Excel</button>
-  <p class="note">Les données sont conservées sur cet appareil.</p>
+<section id="login" class="card loginwrap">
+ <div class="step">Connexion sécurisée</div><h2>Accéder à SUIVI</h2>
+ <label class="fieldlabel" for="email">Adresse e-mail</label><input id="email" type="email" autocomplete="username" placeholder="nom@entreprise.com">
+ <label class="fieldlabel" for="password">Mot de passe</label><input id="password" type="password" autocomplete="current-password" placeholder="Votre mot de passe">
+ <div id="loginError" class="err"></div><div class="row"><button id="loginBtn" class="primary full">Se connecter</button></div>
+ <p class="note">Les comptes sont créés par l'administrateur dans Supabase. Il n'y a pas d'inscription publique.</p>
+</section>
+<section id="app" class="hidden">
+ <div class="userbar"><span id="who"></span><button id="logoutBtn">Déconnexion</button></div>
+ <section id="formCard" class="card hidden"><div id="form"></div></section>
+ <div class="head"><h2>Déplacements enregistrés <span class="badge" id="count">0</span></h2></div>
+ <div id="list"><div class="empty">Chargement…</div></div>
+ <button id="exportBtn" class="primary full hidden">Télécharger le fichier Excel</button>
+ <p class="note">Les données sont synchronisées avec la base centrale Supabase.</p>
+</section>
 </main>
-
-<datalist id="sites"></datalist>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 (function(){
-  var KEY = "deplacements:v1";
-  var Q = [
-    {k:"date",  t:"Quelle est la date du déplacement ?", type:"date", l:"Date"},
-    {k:"site",  t:"Quel est le site du déplacement ?", type:"text", ph:"Ex. : Site Casablanca", l:"Site"},
-    {k:"ticket",t:"Quel est le n° de ticket ?", type:"text", ph:"Ex. : TK-12345", l:"N° de ticket"},
-    {k:"detail",t:"Détail du déplacement", type:"area", ph:"Motif, intervention réalisée, remarques…", l:"Détail"}
-  ];
-  var entries = [], step = 0, draft = {}, done = false;
-
-  try { var s = localStorage.getItem(KEY); if (s) entries = JSON.parse(s) || []; } catch(e){}
-  function save(){ try { localStorage.setItem(KEY, JSON.stringify(entries)); } catch(e){} }
-  function today(){ var d = new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
-  function fr(iso){ var p = (iso||"").split("-"); return p.length===3 ? p[2]+"/"+p[1]+"/"+p[0] : iso; }
-  function el(tag, txt, cls){ var e = document.createElement(tag); if (txt!=null) e.textContent = txt; if (cls) e.className = cls; return e; }
-
-  function renderForm(){
-    var box = document.getElementById("form"); box.innerHTML = "";
-    if (done){
-      box.appendChild(el("div","Enregistré","step"));
-      box.appendChild(el("p","Déplacement ajouté ✔","ok"));
-      box.appendChild(el("p","Souhaitez-vous en ajouter un autre ?")).style.color = "var(--mut)";
-      var r = el("div",null,"row");
-      var n = el("button","Ajouter un autre déplacement","p"); n.onclick = function(){ done=false; step=0; draft={}; renderForm(); };
-      r.appendChild(n); box.appendChild(r); return;
-    }
-    var dots = el("div",null,"dots");
-    for (var i=0;i<=Q.length;i++){ var d = el("i"); if (i<=step) d.className="on"; dots.appendChild(d); }
-    box.appendChild(dots);
-
-    if (step < Q.length){
-      var q = Q[step];
-      box.appendChild(el("div","Question "+(step+1)+" sur "+Q.length,"step"));
-      var lab = el("label",q.t); lab.setAttribute("for","f"); box.appendChild(lab);
-      var inp = document.createElement(q.type==="area" ? "textarea" : "input");
-      inp.id = "f"; if (q.type!=="area") inp.type = q.type;
-      if (q.k==="site") inp.setAttribute("list","sites");
-      if (q.k==="ticket") inp.setAttribute("autocapitalize","characters");
-      if (q.ph) inp.placeholder = q.ph;
-      inp.value = draft[q.k] != null ? draft[q.k] : (q.type==="date" ? today() : "");
-      box.appendChild(inp);
-      var er = el("div",null,"err"); box.appendChild(er);
-      var row = el("div",null,"row");
-      if (step>0){ var back = el("button","Précédent"); back.onclick = function(){ draft[q.k]=inp.value; step--; renderForm(); }; row.appendChild(back); }
-      var next = el("button", step===Q.length-1 ? "Vérifier" : "Suivant", "p");
-      function go(){
-        var v = inp.value.trim();
-        if (!v){ er.textContent = "Merci de renseigner ce champ."; inp.focus(); return; }
-        draft[q.k] = v; step++; renderForm();
-      }
-      next.onclick = go; row.appendChild(next); box.appendChild(row);
-      inp.addEventListener("keydown", function(e){ if (e.key==="Enter" && q.type!=="area"){ e.preventDefault(); go(); } });
-    } else {
-      box.appendChild(el("div","Récapitulatif","step"));
-      var dl = el("dl");
-      Q.forEach(function(q){ dl.appendChild(el("dt",q.l)); dl.appendChild(el("dd", q.k==="date" ? fr(draft[q.k]) : draft[q.k])); });
-      box.appendChild(dl);
-      var r2 = el("div",null,"row");
-      var bk = el("button","Modifier"); bk.onclick = function(){ step = Q.length-1; renderForm(); };
-      var ok = el("button","Enregistrer","p");
-      ok.onclick = function(){ entries.push({date:draft.date,site:draft.site,ticket:draft.ticket,detail:draft.detail}); save(); done=true; renderList(); renderForm(); };
-      r2.appendChild(bk); r2.appendChild(ok); box.appendChild(r2);
-    }
-  }
-
-  function renderList(){
-    var list = document.getElementById("list"); list.innerHTML = "";
-    if (!entries.length) list.appendChild(el("div","Aucun déplacement pour le moment.","empty"));
-    entries.slice().map(function(e,i){ return {e:e,i:i}; }).reverse().forEach(function(o){
-      var e = o.e, c = el("div",null,"item");
-      var top = el("div",null,"top");
-      top.appendChild(el("span",String(o.i+1),"n"));
-      top.appendChild(el("span",fr(e.date),"date"));
-      top.appendChild(el("span",e.ticket,"pill"));
-      c.appendChild(top);
-      c.appendChild(el("div",e.site,"site"));
-      c.appendChild(el("div",e.detail,"det"));
-      var del = el("button","Supprimer","del");
-      del.onclick = function(){ if (confirm("Supprimer ce déplacement ?")){ entries.splice(o.i,1); save(); renderList(); } };
-      c.appendChild(del); list.appendChild(c);
-    });
-    document.getElementById("count").textContent = entries.length;
-    document.getElementById("xl").disabled = !entries.length;
-    var dl = document.getElementById("sites"); dl.innerHTML = "";
-    var seen = {}; entries.forEach(function(e){ if (!seen[e.site]){ seen[e.site]=1; var o = document.createElement("option"); o.value = e.site; dl.appendChild(o); } });
-  }
-
-  document.getElementById("xl").onclick = function(){
-    if (!entries.length) return;
-    var aoa = [["N°","Date du déplacement","Site du déplacement","N° de ticket","Détail du déplacement"]]
-      .concat(entries.map(function(e,i){ return [i+1, fr(e.date), e.site, e.ticket, e.detail]; }));
-    var name = "suivi-deplacements-"+today();
-    try {
-      var blob, filename;
-      if (window.XLSX) {
-        var ws = XLSX.utils.aoa_to_sheet(aoa);
-        ws["!cols"] = [{wch:5},{wch:20},{wch:26},{wch:16},{wch:50}];
-        ws["!autofilter"] = {ref: "A1:E"+aoa.length};
-        var wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, "Déplacements");
-        blob = new Blob([XLSX.write(wb,{type:"array",bookType:"xlsx"})],
-          {type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-        filename = name+".xlsx";
-      } else {
-        var csv = "\ufeff"+aoa.map(function(r){
-          return r.map(function(c){ return '"'+String(c).replace(/"/g,'""')+'"'; }).join(";");
-        }).join("\n");
-        blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
-        filename = name+".csv";
-      }
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement("a");
-      a.href = url; a.download = filename;
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
-    } catch(err) {
-      alert("Le fichier n’a pas pu être exporté. Réessayez.");
-    }
-  };
-
-  renderList(); renderForm();
+ 'use strict';
+ const SUPABASE_URL='https://akhtzirkxonxclsjnsta.supabase.co';
+ const SUPABASE_KEY='sb_publishable_X2Rz9lUU2D3jpO9kdf8enw_UWSL-k5I';
+ const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+ const $=id=>document.getElementById(id);
+ let currentUser=null, profile=null, entries=[], step=0, draft={}, done=false;
+ const questions=[
+  {k:'date',title:'Quelle est la date du déplacement ?',type:'date',label:'Date'},
+  {k:'site',title:'Quel est le site du déplacement ?',type:'text',placeholder:'Ex. : Site Casablanca',label:'Site'},
+  {k:'ticket',title:'Quel est le n° de ticket ?',type:'text',placeholder:'Ex. : TK-12345',label:'N° de ticket'},
+  {k:'detail',title:'Détail du déplacement',type:'area',placeholder:'Motif, intervention réalisée, remarques…',label:'Détail'}
+ ];
+ function today(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+ function fr(iso){if(!iso)return '';const p=iso.split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:iso}
+ function node(tag,text,cls){const e=document.createElement(tag);if(text!=null)e.textContent=text;if(cls)e.className=cls;return e}
+ function showLogin(message=''){ $('login').classList.remove('hidden');$('app').classList.add('hidden');$('loginError').textContent=message; }
+ function roleName(role){return ({admin:'Administrateur',technicien:'Technicien',responsable:'Responsable'})[role]||'Rôle non attribué'}
+ async function loadProfile(){const {data,error}=await db.from('profiles').select('display_name,role').eq('id',currentUser.id).single();if(error)throw error;profile=data;if(!profile||!['admin','technicien','responsable'].includes(profile.role))throw new Error('Aucun rôle valide trouvé pour ce compte. Contactez l’administrateur.');}
+ async function loadEntries(){const {data,error}=await db.from('trips').select('id,trip_date,site,ticket_reference,notes,created_at,created_by').order('trip_date',{ascending:false}).order('created_at',{ascending:false});if(error)throw error;entries=data||[];renderList();}
+ function renderForm(){const box=$('form');box.innerHTML='';if(done){box.append(node('div','Enregistré','step'));box.append(node('p','Déplacement ajouté et synchronisé ✔'));const r=node('div',null,'row');const b=node('button','Ajouter un autre déplacement','primary');b.onclick=()=>{done=false;step=0;draft={};renderForm()};r.append(b);box.append(r);return;}
+  const dots=node('div',null,'row');dots.style.justifyContent='flex-start';for(let i=0;i<questions.length+1;i++){const d=node('span','');d.style.cssText='height:6px;flex:1;border-radius:4px;background:'+(i<=step?'var(--ac)':'var(--bd)');dots.append(d)}box.append(dots);
+  if(step<questions.length){const q=questions[step];box.append(node('div','Question '+(step+1)+' sur '+questions.length,'step'));const lab=node('label',q.title,'fieldlabel');lab.htmlFor='field';box.append(lab);const inp=document.createElement(q.type==='area'?'textarea':'input');inp.id='field';if(q.type!=='area')inp.type=q.type;if(q.placeholder)inp.placeholder=q.placeholder;inp.value=draft[q.k]??(q.k==='date'?today():'');box.append(inp);const er=node('div','','err');box.append(er);const row=node('div',null,'row');if(step>0){const back=node('button','Précédent');back.onclick=()=>{draft[q.k]=inp.value;step--;renderForm()};row.append(back)}const next=node('button',step===questions.length-1?'Vérifier':'Suivant','primary');const go=()=>{const v=inp.value.trim();if(!v){er.textContent='Merci de renseigner ce champ.';inp.focus();return}draft[q.k]=v;step++;renderForm()};next.onclick=go;row.append(next);box.append(row);inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&q.type!=='area'){e.preventDefault();go()}});
+  }else{box.append(node('div','Récapitulatif','step'));const dl=node('dl');dl.style.cssText='display:grid;grid-template-columns:100px 1fr;gap:8px 12px';questions.forEach(q=>{dl.append(node('dt',q.label));const dd=node('dd',q.k==='date'?fr(draft[q.k]):draft[q.k]);dd.style.cssText='margin:0;font-weight:600;white-space:pre-wrap;overflow-wrap:anywhere';dl.append(dd)});box.append(dl);const row=node('div',null,'row');const back=node('button','Modifier');back.onclick=()=>{step=questions.length-1;renderForm()};const save=node('button','Enregistrer','primary');save.onclick=saveTrip;row.append(back,save);box.append(row)}
+ }
+ async function saveTrip(){const buttons=$('form').querySelectorAll('button');buttons.forEach(b=>b.disabled=true);try{const payload={trip_date:draft.date,site:draft.site,ticket_reference:draft.ticket,notes:draft.detail,created_by:currentUser.id};const {error}=await db.from('trips').insert(payload);if(error)throw error;done=true;await loadEntries();renderForm()}catch(e){alert('Impossible d’enregistrer le déplacement : '+e.message);buttons.forEach(b=>b.disabled=false)}}
+ function renderList(){const list=$('list');list.innerHTML='';if(!entries.length)list.append(node('div','Aucun déplacement pour le moment.','empty'));entries.forEach((e,i)=>{const c=node('article',null,'item');const top=node('div',null,'top');top.append(node('span',String(entries.length-i),'badge'));top.append(node('span',fr(e.trip_date),'date'));if(e.ticket_reference)top.append(node('span',e.ticket_reference,'pill'));c.append(top);c.append(node('div',e.site,'site'));c.append(node('div',e.notes||'','det'));if(profile.role==='admin'){const actions=node('div',null,'actions');const edit=node('button','Modifier');edit.onclick=()=>editTrip(e);const del=node('button','Supprimer','danger');del.onclick=()=>deleteTrip(e);actions.append(edit,del);c.append(actions)}list.append(c)});$('count').textContent=entries.length;}
+ async function editTrip(e){const date=prompt('Date (AAAA-MM-JJ) :',e.trip_date);if(date===null)return;const site=prompt('Site :',e.site);if(site===null)return;const ticket=prompt('N° de ticket :',e.ticket_reference||'');if(ticket===null)return;const detail=prompt('Détail :',e.notes||'');if(detail===null)return;try{const {error}=await db.from('trips').update({trip_date:date,site:site.trim(),ticket_reference:ticket.trim(),notes:detail.trim()}).eq('id',e.id);if(error)throw error;await loadEntries()}catch(err){alert('Modification impossible : '+err.message)}}
+ async function deleteTrip(e){if(!confirm('Supprimer ce déplacement ?'))return;try{const {error}=await db.from('trips').delete().eq('id',e.id);if(error)throw error;await loadEntries()}catch(err){alert('Suppression impossible : '+err.message)}}
+ function exportExcel(){if(!entries.length)return;const rows=[['N°','Date du déplacement','Site du déplacement','N° de ticket','Détail du déplacement']].concat(entries.map((e,i)=>[i+1,fr(e.trip_date),e.site,e.ticket_reference||'',e.notes||'']));const ws=XLSX.utils.aoa_to_sheet(rows);ws['!cols']=[{wch:5},{wch:20},{wch:26},{wch:18},{wch:55}];ws['!autofilter']={ref:'A1:E'+rows.length};const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Déplacements');XLSX.writeFile(wb,'suivi-deplacements-'+today()+'.xlsx')}
+ async function enterApp(user){currentUser=user;try{await loadProfile();$('login').classList.add('hidden');$('app').classList.remove('hidden');$('who').textContent=(profile.display_name||user.email)+' — '+roleName(profile.role);$('formCard').classList.toggle('hidden',!['technicien','admin'].includes(profile.role));$('exportBtn').classList.toggle('hidden',!['responsable','admin'].includes(profile.role));if(['technicien','admin'].includes(profile.role)){step=0;draft={};done=false;renderForm()}await loadEntries()}catch(e){await db.auth.signOut();currentUser=null;showLogin(e.message)}}
+ $('loginBtn').onclick=async()=>{const email=$('email').value.trim(),password=$('password').value;if(!email||!password){showLogin('Renseignez votre adresse e-mail et votre mot de passe.');return}$('loginBtn').disabled=true;$('loginError').textContent='Connexion…';const {data,error}=await db.auth.signInWithPassword({email,password});$('loginBtn').disabled=false;if(error){showLogin('Connexion impossible : '+error.message);return}await enterApp(data.user)};
+ $('password').addEventListener('keydown',e=>{if(e.key==='Enter')$('loginBtn').click()});$('logoutBtn').onclick=async()=>{await db.auth.signOut();currentUser=null;profile=null;entries=[];showLogin()};$('exportBtn').onclick=exportExcel;
+ db.auth.getSession().then(({data})=>{if(data.session)enterApp(data.session.user);else showLogin()});
+ db.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){currentUser=null;profile=null;showLogin()}});
 })();
-</script>
-<script>
-if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker.register("./sw.js").catch(function (err) {
-      console.warn("Service worker non enregistré :", err);
-    });
-  });
-}
 </script>
 </body>
 </html>
